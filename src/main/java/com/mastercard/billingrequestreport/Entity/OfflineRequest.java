@@ -1,7 +1,11 @@
 package com.mastercard.billingrequestreport.Entity;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Entity;
+
+//@Entity
 @Repository
 public class OfflineRequest {
 
@@ -9,12 +13,22 @@ public class OfflineRequest {
     private String reportType;
     private String searchCriteria;
     private String userId;
-    private String createdIimestamp;
+    private String createdTimestamp;
     private String lastUpdatedTimestamp;
     private String status;
     private String path;
     private String isDeleted;
 
+    @Id
+    private String requestId;
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
 
     public String getFeederType() {
         return feederType;
@@ -48,12 +62,12 @@ public class OfflineRequest {
         this.userId = userId;
     }
 
-    public String getCreatedIimestamp() {
-        return createdIimestamp;
+    public String getCreatedTimestamp() {
+        return createdTimestamp;
     }
 
-    public void setCreatedIimestamp(String createdIimestamp) {
-        this.createdIimestamp = createdIimestamp;
+    public void setCreatedTimestamp(String createdTimestamp) {
+        this.createdTimestamp = createdTimestamp;
     }
 
     public String getLastUpdatedTimestamp() {

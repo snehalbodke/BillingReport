@@ -24,6 +24,35 @@ public class OfflineDetailsResponse {
         private String link;
 
 
+        public String getRequestId() {
+                return requestId;
+        }
 
+        public void setRequestId(String requestId) {
+                this.requestId = requestId;
+        }
 
+        public String getRequestedTimeStamp() {
+                return requestedTimeStamp;
+        }
+
+        public void setRequestedTimeStamp(String requestedTimeStamp) {
+                this.requestedTimeStamp = requestedTimeStamp;
+        }
+
+        public String getStatus() {
+                return status;
+        }
+
+        public void setStatus(String status) {
+                this.status = status;
+        }
+
+        public String getLink() {
+                return link;
+        }
+
+        public void setLink(String link) {
+                this.link = link;
+        }
 }

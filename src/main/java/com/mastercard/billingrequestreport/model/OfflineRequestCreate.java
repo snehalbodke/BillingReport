@@ -1,6 +1,8 @@
 package com.mastercard.billingrequestreport.model;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,8 +11,11 @@ public class OfflineRequestCreate {
 
     @NotNull
     private String feederType;
-    //public enum reportType  {Summary,Detail};
-    @NotNull
+    private enum reportType1  {Summary,Detail};
+
+
+    @NotNull@Value("reportType1")
+
     private String reportType;
     @NotNull
     private String searchCriteria;

@@ -27,26 +27,10 @@ public class BillingReportRepository {
                 });
     }
 
-    public OfflineDetailsResponse findByRequestId(String id) throws SQLException {
+    public OfflineRequest findByRequestId(String id) throws SQLException {
         String sql = "SELECT * FROM OFFLINE_REQUESTS WHERE REQUEST_ID = ?";
 
-       /* try {
-            String sql = "SELECT * FROM OFFLINE_REQUESTS WHERE REQUEST_ID = ?";
-            OfflineRequestDetails offlineRequestDetails = jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapper<OfflineRequestDetails>() {
-                @Override
-                public OfflineRequestDetails mapRow(ResultSet resultSet, int i) throws SQLException {
-                    OfflineRequestDetails offlineRequestDetails = new OfflineRequestDetails();
-
-                    return offlineRequestDetails;
-                }
-            });
-            return offlineRequestDetails;
-         //   return (OfflineRequestDetails) jdbcTemplate.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper(OfflineRequestDetails.class));
-        }catch (EmptyResultDataAccessException e) {
-            return null;
-        }*/
-
-       return (OfflineDetailsResponse) jdbcTemplate.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper(OfflineDetailsResponse.class));
+     return (OfflineRequest) jdbcTemplate.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper(OfflineRequest.class));
 
     }
 

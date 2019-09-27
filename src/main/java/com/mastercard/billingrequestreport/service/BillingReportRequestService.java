@@ -40,7 +40,16 @@ String message = null;
     }
 
 public OfflineDetailsResponse getReportRequestDetailsById (String requestId) throws SQLException {
-   return  billingReportRepository.findByRequestId(requestId);
+
+    OfflineDetailsResponse offlineDetailsResponse = new OfflineDetailsResponse();
+
+    offlineRequest = billingReportRepository.findByRequestId(requestId);
+    offlineDetailsResponse.setRequestId("1234");
+    offlineDetailsResponse.setStatus(offlineRequest.getStatus());
+    offlineDetailsResponse.setLink(offlineRequest.getPath());
+    offlineDetailsResponse.setRequestedTimeStamp(offlineRequest.getCreatedTimestamp());
+
+   return offlineDetailsResponse ;
 }
 
 //To download Files from S3
