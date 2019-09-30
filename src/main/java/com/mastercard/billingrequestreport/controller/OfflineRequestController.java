@@ -18,9 +18,9 @@ import javax.validation.Valid;
 import java.sql.SQLException;
 
 @RestController
-@RequestMapping("/billing/requests")
+@RequestMapping("/tran-detail/requests")
 @Api("Requets API endpoints for posting ,retrieving and updating offline request of users from system.")
-public class BillingReportController {
+public class OfflineRequestController {
 
     @Autowired
     private BillingReportRequestService billingReportRequestService;
@@ -35,15 +35,10 @@ public class BillingReportController {
     })
     public ResponseEntity<OfflineRequestCreateResponse> requestReport(@RequestBody @Valid OfflineRequestCreate offlineRequestCreate,@RequestHeader("userId") String userId) {
 
-        System.out.println("In Request");
-      /*  offlineRequestCreate.setUserId("SN20098787");//need to fetch it from SAML token
-        offlineRequestCreate.setPath("http://www.google.com");//temp
-        offlineRequestCreate.setStatus("INITIATED");//temp
 
-        OfflineRequestCreate.inpReportType.valueOf(offlineRequestCreate.getReportType());*/
        return new ResponseEntity<OfflineRequestCreateResponse>(billingReportRequestService.sendBillingReportRequest(userId,offlineRequestCreate), HttpStatus.CREATED);
 
-       // return ResponseEntity.status(HttpStatus.CREATED).body(billingReportRequestService.sendBillingReportRequest(offlineRequestCreate));
+
     }
 
     @ApiOperation("Returns Offline request details for {request-id} .")
@@ -60,7 +55,7 @@ public class BillingReportController {
     }
 
     @ApiOperation("Downloads offline details as per file generated for {request-id}.")
-    @GetMapping("/billing/requests/{request-id}/download")
+    @GetMapping("{request-id}/download")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Bad request", response = ErrorHandler.class),
             @ApiResponse(code = 404, message = "Record Not Found", response = ErrorHandler.class),

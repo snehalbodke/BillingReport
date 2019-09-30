@@ -22,7 +22,8 @@ BillingReportRepository billingReportRepository;
 
         //Populate offline request details
         offlineRequest.setFeederType(offlineRequestCreate.getFeederType());
-        offlineRequest.setReportType(offlineRequestCreate.getReportType());
+       // offlineRequest.setReportType(offlineRequestCreate.getReportType());
+        offlineRequest.setReportType(offlineRequestCreate.getReportType().toString());
         offlineRequest.setSearchCriteria(offlineRequestCreate.getSearchCriteria());
         offlineRequest.setUserId(userId);
         offlineRequest.setPath("mastercard.com");

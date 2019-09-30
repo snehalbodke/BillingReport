@@ -1,22 +1,35 @@
 package com.mastercard.billingrequestreport.model;
 
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import lombok.Data;
+
+import javax.annotation.security.RolesAllowed;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
 @Data
 public class OfflineRequestCreate {
 
+    public enum ReportType {
+        Summary,Detail;
+
+    }
     @NotNull
     private String feederType;
-    private enum reportType1  {Summary,Detail};
 
 
-    @NotNull@Value("reportType1")
+   private ReportType reportType;
 
-    private String reportType;
+
+    public ReportType getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(ReportType reportType) {
+        this.reportType = reportType;
+    }
+
     @NotNull
     private String searchCriteria;
 
@@ -29,13 +42,13 @@ public class OfflineRequestCreate {
         this.feederType = feederType;
     }
 
-    public String getReportType() {
+   /* public String getReportType() {
         return reportType;
     }
 
     public void setReportType(String reportType) {
         this.reportType = reportType;
-    }
+    }*/
 
     public String getSearchCriteria() {
         return searchCriteria;
