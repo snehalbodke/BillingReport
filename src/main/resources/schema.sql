@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS OFFLINE_REQUESTS;
 
 create TABLE OFFLINE_REQUESTS (
---REQUEST_ID varchar2(50) not null,
-REQUEST_ID bigint auto_increment,
+REQUEST_ID varchar2(50) not null,
+--REQUEST_ID bigint auto_increment,
 USER_ID varchar2(50) not null,
 CREATED_TIMESTAMP varchar2(100),
 LAST_UPDATED_TIMESTAMP varchar2(100),

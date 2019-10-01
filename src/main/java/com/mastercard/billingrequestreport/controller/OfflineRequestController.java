@@ -26,7 +26,7 @@ public class OfflineRequestController {
     private BillingReportRequestService billingReportRequestService;
 
     @PostMapping()
-    @ApiOperation("Returns Request Id and message post submittting the request for offline processing.")
+    @ApiOperation("Returns Request Id and message post submitting the request for offline processing.")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Bad request", response = ErrorHandler.class),
             @ApiResponse(code = 404, message = "Record Not Found", response = ErrorHandler.class),
@@ -34,11 +34,7 @@ public class OfflineRequestController {
             
     })
     public ResponseEntity<OfflineRequestCreateResponse> requestReport(@RequestBody @Valid OfflineRequestCreate offlineRequestCreate,@RequestHeader("userId") String userId) {
-
-
        return new ResponseEntity<OfflineRequestCreateResponse>(billingReportRequestService.sendBillingReportRequest(userId,offlineRequestCreate), HttpStatus.CREATED);
-
-
     }
 
     @ApiOperation("Returns Offline request details for {request-id} .")
@@ -47,7 +43,6 @@ public class OfflineRequestController {
             @ApiResponse(code = 400, message = "Bad request", response = ErrorHandler.class),
             @ApiResponse(code = 404, message = "Record Not Found", response = ErrorHandler.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorHandler.class )
-            
     })
     public ResponseEntity<OfflineDetailsResponse> getReportRequestDetailsById(@PathVariable(value = "request-id") String requestId) throws SQLException {
         OfflineDetailsResponse offlineDetailsResponse = billingReportRequestService.getReportRequestDetailsById(requestId);
@@ -60,7 +55,6 @@ public class OfflineRequestController {
             @ApiResponse(code = 400, message = "Bad request", response = ErrorHandler.class),
             @ApiResponse(code = 404, message = "Record Not Found", response = ErrorHandler.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorHandler.class )
-            
     })
     public ResponseEntity<Object> downloadReportById(@PathVariable(value = "request-id") String requestId) throws SQLException {
         return ResponseEntity.ok().body(billingReportRequestService.downloadReportById(requestId));

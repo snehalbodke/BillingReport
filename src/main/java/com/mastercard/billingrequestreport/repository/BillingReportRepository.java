@@ -19,11 +19,9 @@ public class BillingReportRepository {
 
     public int insert(OfflineRequest offlineRequest) {
         String dateStr = getDate();
-        return jdbcTemplate.update("insert into OFFLINE_REQUESTS (USER_ID, CREATED_TIMESTAMP, LAST_UPDATED_TIMESTAMP,STATUS,PATH,IS_DELETED,FEEDER_TYPE,SEARCH_CRITERIA,REPORT_TYPE) " + "values(?,  ?, ?,?,  ?, ?,?,?,?)",
+        return jdbcTemplate.update("insert into OFFLINE_REQUESTS (REQUEST_ID,USER_ID, CREATED_TIMESTAMP, LAST_UPDATED_TIMESTAMP,STATUS,PATH,IS_DELETED,FEEDER_TYPE,SEARCH_CRITERIA,REPORT_TYPE) " + "values(?,?,  ?, ?,?,  ?, ?,?,?,?)",
                 new Object[]{
-                        //offlineRequestDTO.getUserId(), offlineRequestDTO.getCreatedIimestamp(), offlineRequestDTO.getLastUpdatedTimestamp(), offlineRequestDTO.getStatus(), offlineRequestDTO.getPath(), offlineRequestDTO.getIsDeleted(),offlineRequestDTO.getFeederType(),offlineRequestDTO.getSearchCriteria(),offlineRequestDTO.getReportType()
-
-                        offlineRequest.getUserId(), dateStr, dateStr, offlineRequest.getStatus(), offlineRequest.getPath(), offlineRequest.getIsDeleted(), offlineRequest.getFeederType(), offlineRequest.getSearchCriteria(), offlineRequest.getReportType()
+                        offlineRequest.getRequestId(),   offlineRequest.getUserId(), dateStr, dateStr, offlineRequest.getStatus(), offlineRequest.getPath(), offlineRequest.getIsDeleted(), offlineRequest.getFeederType(), offlineRequest.getSearchCriteria(), offlineRequest.getReportType()
                 });
     }
 

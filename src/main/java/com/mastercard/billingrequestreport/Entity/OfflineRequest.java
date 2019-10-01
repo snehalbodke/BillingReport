@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 
 //@Entity
 @Repository
@@ -20,7 +21,8 @@ public class OfflineRequest {
     private String isDeleted;
 
     @Id
-    private String requestId;
+
+    private String requestId ;
 
     public String getRequestId() {
         return requestId;

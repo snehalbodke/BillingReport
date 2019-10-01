@@ -3,9 +3,6 @@ package com.mastercard.billingrequestreport.model;
 
 import lombok.Data;
 
-import javax.annotation.security.RolesAllowed;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -13,14 +10,13 @@ public class OfflineRequestCreate {
 
     public enum ReportType {
         Summary,Detail;
-
     }
     @NotNull
     private String feederType;
+    private ReportType reportType;
 
-
-   private ReportType reportType;
-
+    @NotNull
+    private String searchCriteria;
 
     public ReportType getReportType() {
         return reportType;
@@ -29,10 +25,6 @@ public class OfflineRequestCreate {
     public void setReportType(ReportType reportType) {
         this.reportType = reportType;
     }
-
-    @NotNull
-    private String searchCriteria;
-
 
     public String getFeederType() {
         return feederType;

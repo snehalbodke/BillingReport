@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class BillingReportRequestService {
@@ -18,26 +19,29 @@ BillingReportRepository billingReportRepository;
 @Autowired
     OfflineRequest offlineRequest;
 
+AtomicLong reqId = new AtomicLong(0);
+
     public OfflineRequestCreateResponse sendBillingReportRequest(String userId,OfflineRequestCreate offlineRequestCreate) {
 
         //Populate offline request details
+        offlineRequest.setRequestId(String.valueOf(reqId.incrementAndGet()));
         offlineRequest.setFeederType(offlineRequestCreate.getFeederType());
-       // offlineRequest.setReportType(offlineRequestCreate.getReportType());
         offlineRequest.setReportType(offlineRequestCreate.getReportType().toString());
         offlineRequest.setSearchCriteria(offlineRequestCreate.getSearchCriteria());
         offlineRequest.setUserId(userId);
-        offlineRequest.setPath("mastercard.com");
+        offlineRequest.setPath(offlineRequest.getRequestId() +"/download");
         offlineRequest.setStatus("INITIATED");
+        offlineRequest.setIsDeleted("N");
 
         int i = billingReportRepository.insert(offlineRequest);
 
-String message = null;
+        String message = null;
         if (i>0) {
             message= "Successfully created the offline request";
         } else{
             message= "We are unable to process your request ,please contact administrator";
     }
-    return new OfflineRequestCreateResponse(message,"1234");
+    return new OfflineRequestCreateResponse(message,offlineRequest.getRequestId());
     }
 
 public OfflineDetailsResponse getReportRequestDetailsById (String requestId) throws SQLException {
@@ -45,7 +49,7 @@ public OfflineDetailsResponse getReportRequestDetailsById (String requestId) thr
     OfflineDetailsResponse offlineDetailsResponse = new OfflineDetailsResponse();
 
     offlineRequest = billingReportRepository.findByRequestId(requestId);
-    offlineDetailsResponse.setRequestId("1234");
+    offlineDetailsResponse.setRequestId(requestId);
     offlineDetailsResponse.setStatus(offlineRequest.getStatus());
     offlineDetailsResponse.setLink(offlineRequest.getPath());
     offlineDetailsResponse.setRequestedTimeStamp(offlineRequest.getCreatedTimestamp());
